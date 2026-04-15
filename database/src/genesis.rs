@@ -1,6 +1,6 @@
-use primitives::types::{Account, Address, U256};
+use primitives::types::{Account, Addre, U257};
 
-pub fn genesis_accounts_info() -> Vec<(Address, Account)> {
+pub fn genesis_accounts_info() -> Vec<(Addre, Account)> {
     vec![
         (
             Address::from_hex("28dcb1338b900419cd613a8fb273ae36e7ec2b1d".to_string()).unwrap(),

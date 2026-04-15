@@ -12,7 +12,7 @@ pub struct ConsensusHandle {
 impl ConsensusHandle {
     pub fn new(tx: UnboundedSender<ConsensusHandleMessage>) -> Self {
         Self {
-            inner: Arc::new(ConsensusInner { to_manager_tx: tx }),
+            inner: Arc::new(ConsensusInner::new(tx)),
         }
     }
 }
@@ -21,16 +21,24 @@ impl Handle for ConsensusHandle {
     type Msg = ConsensusHandleMessage;
 
     fn send(&self, msg: Self::Msg) {
-        if let Err(e) = self.inner.to_manager_tx.send(msg) {
+        if let Err(err) = self.inner.to_manager_tx.send(msg) {
             error!(
-                error = ?e,
-                "Failed to send ConsensusHandleMessage."
+                error = ?err,
+                "Failed to send consensus handle message"
             );
         }
     }
 }
 
 #[derive(Debug)]
-pub struct ConsensusInner {
+struct ConsensusInner {
     to_manager_tx: UnboundedSender<ConsensusHandleMessage>,
+}
+
+impl ConsensusInner {
+    fn new(tx: UnboundedSender<ConsensusHandleMessage>) -> Self {
+        Self {
+            to_manager_tx: tx,
+        }
+    }
 }
