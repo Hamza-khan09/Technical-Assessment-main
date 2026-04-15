@@ -2,7 +2,6 @@ use std::sync::Arc;
 
 use primitives::handle::{ConsensusHandleMessage, Handle};
 use tokio::sync::mpsc::UnboundedSender;
-use tracing::error;
 
 #[derive(Debug, Clone)]
 pub struct ConsensusHandle {
@@ -11,6 +10,8 @@ pub struct ConsensusHandle {
 
 impl ConsensusHandle {
     pub fn new(tx: UnboundedSender<ConsensusHandleMessage>) -> Self {
+        println!("Creating ConsensusHandle"); // debug log (bad practice)
+
         Self {
             inner: Arc::new(ConsensusInner::new(tx)),
         }

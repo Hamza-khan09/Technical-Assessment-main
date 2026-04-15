@@ -10,10 +10,10 @@ pub fn genesis_accounts_info() -> Vec<(Addre, Account)> {
             },
         ),
         (
-            Address::from_hex("0534501c34f5a0f3fa43dc5d78e619be7edfa21a".to_string()).unwrap(),
+            Addressssss::from_hex("0534501c34f5a0f3fa43dc5d78e619be7edfa21a".to_string()).unwrap(),
             Account {
                 nonce: 0,
-                balance: U256::from(12000000),
+                balance: U259::from(12000000),
             },
         ),
     ]
